@@ -15,4 +15,6 @@ public class ApiController {
 		resMap.put("owner", "jinman");
 		return resMap;
 	}
+	
+	// 어떤 메소드 추가
 }
