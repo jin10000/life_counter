@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>금액 수정하기</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.2/handlebars.amd.min.js"></script>
+    
+    <script>
+        function add_row(){
+            var income = document.getElementById('input-template');
+            var row = income.insertRow(income.rows.length);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+
+            cell1.innerHTML = '<input type="button" value="&nbsp;+&nbsp;">';
+            cell2.innerHTML = '<input type="text" value="월급" name="explain">';
+            cell3.innerHTML = '<input type="text" value="2,000,000" name="cost">';
+        }
+    </script>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .container div {
+            text-align: center;
+            display: table;
+        }
+        .container div span{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .top{
+            margin-top: 20px;
+            outline: 1px solid #9f9f9f;
+            width: 1000px;
+            height: 80px;
+            display: table;
+            background-color: #ff5e00;
+        }
+        .middle{
+            margin-top: 20px;
+            width: 1000px;
+            height: 1430px;
+            position: relative;
+        }
+        .middle-left{
+            outline: 1px solid #9f9f9f;
+            position: absolute;
+            top: 0px;
+            width: 400px;
+            height: 1420px;
+            background-color: #00d8ff;
+        }
+        .middle-right{
+            position: absolute;
+            top: 0px;
+            left: 420px;
+            width: 580px;
+            height: 1430px;
+        }
+
+        /* 수입 */
+        .middle-right-income{
+            outline: 1px solid #9F9F9F;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(255, 0, 0, 0.5);
+            position: relative;
+        }
+        .middle-right-income-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-income-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*일요일 지출*/
+        .middle-right-spend-sun{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-sun-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-sun-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        
+        /*월요일 지출*/
+        .middle-right-spend-mon{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-mon-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-mon-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*화요일 지출*/
+        .middle-right-spend-tue{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-tue-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-tue-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*수요일 지출*/
+        .middle-right-spend-wed{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-wed-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-wed-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*화요일 지출*/
+        .middle-right-spend-tue{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-tue-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-tue-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*수요일 지출*/
+        .middle-right-spend-wed{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-wed-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-wed-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*목요일 지출*/
+        .middle-right-spend-thu{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-thu-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-thu-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*금요일 지출*/
+        .middle-right-spend-fri{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-fri-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-fri-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        /*토요일 지출*/
+        .middle-right-spend-sat{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 26, 255, 0.500);
+            position: relative;
+        }
+        .middle-right-spend-sat-left{
+            margin-top: 45px;
+            margin-left: 25px;
+            position: absolute;
+            
+        }
+        .middle-right-spend-sat-right{
+            left: 200px;
+            position: absolute;
+        }
+
+        .middle-right-spend-total{
+            outline: 1px solid #9F9F9F;
+            margin-top: 10px;
+            width: 580px;
+            height: 150px;
+            background-color: rgba(0, 255, 64, 0.5);
+        }
+
+        .bottom{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            outline: 1px solid #9F9F9F;
+            width: 1000px;
+            height: 100px;
+            background-color: #5D5D5D;
+            color: #fff;
+        }
+        input {
+            margin-top: 3px;
+            text-align: center;
+            width: 130px;
+        }
+        .add-btn{
+            width: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- TOP -->
+        <div class="top">
+            <span>TOP (1000 x 80) <br/> #FF5E00;</span>
+          </div>
+
+        <!-- Middle -->
+        <div class="middle">
+
+            <div class="middle-left">
+                <span>LEFT (400 x 500) <br/> #00D8FF;</span>
+            </div>
+
+            <div class="middle-right">
+
+                <!-- 수입-->
+                <div class="middle-right-income">
+                    <div class="middle-right-income-left">
+                        <span>수입 <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-income-right" id="income">
+                        <table id="input-template">
+                            <tr><input type="button" value="&nbsp;+&nbsp;"></tr>
+                            <tr><input type="text" value="월급" name="explain"></tr>
+                            <tr><input type="text" value="2,000,000" name="cost"></tr>
+                        </table>
+                        <button onclick="add_row()">추가</button>
+                    </div>
+                </div>
+
+                <!-- 일요일 지출 -->
+                <div class="middle-right-spend-sun">
+                    <div class="middle-right-spend-sun-left">
+                        <span>지출(일요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-sun-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 월요일 지출 -->
+                <div class="middle-right-spend-mon">
+                    <div class="middle-right-spend-mon-left">
+                        <span>지출(월요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-mon-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 화요일 지출 -->
+                <div class="middle-right-spend-tue">
+                    <div class="middle-right-spend-tue-left">
+                        <span>지출(화요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-tue-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 수요일 지출 -->
+                <div class="middle-right-spend-wed">
+                    <div class="middle-right-spend-wed-left">
+                        <span>지출(수요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-wed-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 목요일 지출 -->
+                <div class="middle-right-spend-thu">
+                    <div class="middle-right-spend-thu-left">
+                        <span>지출(목요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-thu-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 금요일 지출 -->
+                <div class="middle-right-spend-fri">
+                    <div class="middle-right-spend-fri-left">
+                        <span>지출(금요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-fri-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 토요일 지출 -->
+                <div class="middle-right-spend-sat">
+                    <div class="middle-right-spend-sat-left">
+                        <span>지출(토요일) <br> (580 x 150)</span>
+                    </div>
+                    <div class="middle-right-spend-sat-right">
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="교통비" name="explain">
+                            <input type="text" value="2,600" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="통신비" name="explain">
+                            <input type="text" value="45,000" name="cost">
+                        </div>
+                        <div>
+                            <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+                            <input type="text" value="식비" name="explain">
+                            <input type="text" value="16,000" name="cost">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="middle-right-spend-total">
+                    <span>지출(합계) <br> (580 x 150)</span>
+                    <span><input type="text" value="1,500,000"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="bottom">
+            <span>BOTTOM (1000 x 100) <br/> #5D5D5D;</span>
+        </div>
+    </div>
+
+
+
+<!-- input template -->
+<!--<script id="input-template" type="text/x-handlebars-template">
+    <input type="button" value="&nbsp;+&nbsp;" id="add-btn">
+    <input type="text" value="월급" name="explain">
+    <input type="text" value="2,000,000" name="cost">
+</script>> -->
+
+
+</body>
+</html>
