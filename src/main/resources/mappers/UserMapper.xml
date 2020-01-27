@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="userMapper">
+
+  	<select id="selectUserById" resultType="org.king.life_counter.vo.User">
+  		<![CDATA[
+  			select * from LIFE_COUNTER_SCHEMA.User where id=#{id};
+  		]]>
+  	</select>
+  	
+  	<select id="selectAllUser" resultType="org.king.life_counter.vo.User">
+  		<![CDATA[
+  			select * from LIFE_COUNTER_SCHEMA.User;
+  		]]>
+  	</select>
+  	
+  	<select id="selectUserByNickname" resultType="org.king.life_counter.vo.User">
+  		<![CDATA[
+  			select * from LIFE_COUNTER_SCHEMA.User where nickname='jih';
+  		]]>
+  	</select>
+  	
+  </mapper>
+
